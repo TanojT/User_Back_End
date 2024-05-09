@@ -15,19 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.DAO.AddressRepository;
-import com.example.demo.DTO.Address;
 import com.example.demo.DTO.User;
 import com.example.demo.Service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping
 public class UserController {
     @Autowired
     private UserService userService;
     
 
-    @GetMapping
+    @GetMapping("/user")
     public List<User> getAllUser(){
         return userService.findAll();
     }
@@ -41,22 +39,27 @@ public class UserController {
         return new ResponseEntity<String>("User Health is good", HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/user")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<User> postUser(@RequestBody User user){
         return ResponseEntity.status(HttpStatus.OK).body(userService.save(user));
     }
 
-    @PutMapping
+    @PutMapping("/user")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<User> putUser(@RequestBody User user) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.update(user));
     }
-    @DeleteMapping
+    @DeleteMapping("/user")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<String> deleteUser(@RequestParam int id){
         userService.delete(id);
         return ResponseEntity.status(HttpStatus.OK).body("Deleted user successfully!");
     }
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestParam String userName, String password) {
+        return ResponseEntity.status(HttpStatus.OK).body("User Logged In");  
+    }
+    
 
 }
