@@ -36,7 +36,12 @@ public class UserService {
         }
         UserType userType = user.getUserType();
         if(userType != null && userType.getId() == null) {
-            userType = userTypeRepository.save(userType);
+            UserType existingUserType = userTypeRepository.findByUserDesignation(userType.getUserDesignation());
+            if (existingUserType == null) {
+                userType = userTypeRepository.save(userType);
+            } else {
+                userType = existingUserType;
+            }
         }
         user.setUserType(userType);
         

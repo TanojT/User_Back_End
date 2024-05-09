@@ -1,0 +1,18 @@
+{
+    "firstName": "Vijay",
+    "lastName": "Krishna",
+    "mobile": "7321742730",
+    "emailId": "v@gmail.com",
+    "address": {
+        "addressLine": "addressLine1",
+        "houseNumber": "houseNumber1",
+        "city": "city1",
+        "district": "district1",
+        "state": "state1",
+        "country": "country1",
+        "pinCode": "50534"
+    },
+    "userType": {
+        "userDesignation": "COMPANY_AGENT"
+    }
+}
