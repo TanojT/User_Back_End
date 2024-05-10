@@ -1,6 +1,7 @@
 package com.example.demo.DAO;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,4 +13,5 @@ public interface UserRepository extends JpaRepository<User,Integer>{
     User save(User user);
     User findUserById(int userId);
     void deleteUserById(int userId);
+    Optional<User> findUserByEmailId(String emailId);
 }
