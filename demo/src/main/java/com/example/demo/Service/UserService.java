@@ -10,21 +10,23 @@ import com.example.demo.DAO.UserRepository;
 import com.example.demo.DAO.UserTypeRepository;
 import com.example.demo.DTO.Address;
 import com.example.demo.DTO.User;
+import com.example.demo.DTO.UserCredentials;
 import com.example.demo.DTO.UserType;
 
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
 public class UserService {
     
+  
     @Autowired
     private  UserRepository userRepository;
 
     @Autowired
     private AddressRepository addressRepository;
 
-    
     @Autowired
     private  UserTypeRepository userTypeRepository;
 
@@ -69,6 +71,14 @@ public class UserService {
     public void delete(int userId){
         userRepository.deleteUserById(userId);
         
+    }
+
+    public String authenticate(UserCredentials userCredentials){
+        if (userRepository.existsByUsernameAndPassword(userCredentials.getUserName(), userCredentials.getPassword())) {
+            return "Authentication successful";
+        } else {
+            return "Authentication failure";
+        }
     }
 
 }
