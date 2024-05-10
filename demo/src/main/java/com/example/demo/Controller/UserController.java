@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.DTO.User;
+import com.example.demo.DTO.UserCredentials;
 import com.example.demo.Service.UserService;
 
 @RestController
@@ -24,14 +25,9 @@ public class UserController {
     @Autowired
     private UserService userService;
     
-
     @GetMapping("/user")
     public List<User> getAllUser(){
         return userService.findAll();
-    }
-
-    UserController() {
-        System.out.println("User Controller ---------------------------->");
     }
 
     @GetMapping(path="/health")
@@ -50,16 +46,17 @@ public class UserController {
     public ResponseEntity<User> putUser(@RequestBody User user) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.update(user));
     }
+
     @DeleteMapping("/user")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<String> deleteUser(@RequestParam int id){
         userService.delete(id);
         return ResponseEntity.status(HttpStatus.OK).body("Deleted user successfully!");
     }
+
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String userName, String password) {
-        return ResponseEntity.status(HttpStatus.OK).body("User Logged In");  
+    public ResponseEntity<String> login(@RequestBody UserCredentials userCredentials) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.authenticate(userCredentials));  
     }
     
-
 }

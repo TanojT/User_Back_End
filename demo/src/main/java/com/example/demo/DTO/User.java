@@ -37,6 +37,12 @@ public class User {
     @Column(name="email_id")
     private String emailId;
 
+    @Column(name="user_name")
+    private String userName;
+
+    @Column(name="password")
+    private String password;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     // @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -45,4 +51,7 @@ public class User {
     @JoinColumn(name="user_type_id")
     private UserType userType;
 
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "user_credentials_id")
+    // private UserCredentials userCredentials;
 }
